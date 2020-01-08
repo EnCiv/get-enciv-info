@@ -34,6 +34,8 @@ ioClient.on('connect',()=>{
 });
 
 function getEncivInfo(...args) {
+    if(args[0]==='disconnect') 
+        return ioClient.close();
     if(!authenticated) queued.push(()=>ioClient.emit(...args))
     else
         ioClient.emit(...args)

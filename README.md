@@ -19,8 +19,8 @@ ENCIV_API_KEY="a long private api key"
 ENCIV_API_URL="https://enciv-api-server-name.com"
 ```
 
-## Two API calls are supported.
-### Get the conversation viewer urls:
+## APIs
+### `stage_videos`: Get the candidate conversation viewer urls:
 
 ```
 const getEncivInfo=require('get-enciv-info');
@@ -41,7 +41,7 @@ this output is a list of objects that look like this:
      ...
  ]
 ```
-### Get candidate recorder urls:
+### `candidate_videos`: Get candidate recorder urls:
 ```
 getEncivInfo("candidate_videos","2020",candidate_videos=>{
     if(!candidate_videos) console.error("error getting candidate_videos");
@@ -61,6 +61,12 @@ this output is a list of objects that look like this:
     ...
 ]
 ```
+### `disconnect`: close the connection
+The socket.io connection to the server is persistent.  If you ever want to disconnect from the server, for example so the demo program will exit, use the disconnect API
+```
+getEncivInfo("disconnect")
+```
+
 To test this, you can git clone the repo, set the environment variables, and run the demo
 ```
 node demo
