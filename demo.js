@@ -10,5 +10,5 @@ getEncivInfo("stage_videos","2020",stage_videos=>{
 getEncivInfo("candidate_videos","2020",candidate_videos=>{
     if(!candidate_videos) console.error("error getting candidate_videos");
     console.info("getEncivInfo:", candidate_videos);
-    getEncivInfo("disconnect");  // close the connection so the process exits
+    getEncivInfo("disconnect","exit");  // close the connection so the process exits
 })

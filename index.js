@@ -33,10 +33,17 @@ ioClient.on('connect',()=>{
     })
 });
 
+function disconnect(...args){
+    ioClient.emit('force-disconnect','exit');
+    return ioClient.close();
+}
+
 function getEncivInfo(...args) {
-    if(args[0]==='disconnect') 
-        return ioClient.close();
-    if(!authenticated) queued.push(()=>ioClient.emit(...args))
+    if(args[0]==='disconnect') {
+        if(!authenticated) queued.push(disconnect);
+        else disconnect(...args);
+    } else if(!authenticated) 
+        queued.push(()=>ioClient.emit(...args))
     else
         ioClient.emit(...args)
 }
